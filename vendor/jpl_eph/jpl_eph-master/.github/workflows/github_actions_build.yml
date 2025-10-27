@@ -1,0 +1,48 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  buildUbuntu:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: make
+      run: |
+        git clone https://github.com/Bill-Gray/lunar
+        cd lunar
+        make
+        make install
+        cd ..
+        make
+
+  buildOSX:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: make
+      run: |
+        git clone https://github.com/Bill-Gray/lunar
+        cd lunar
+        make CLANG=Y
+        make install
+        cd ..
+        make CLANG=Y
+
+  buildWindows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: make
+      run: |
+        call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+        git clone https://github.com/Bill-Gray/lunar
+        mkdir myincl
+        cd lunar
+        nmake -f lunar.mak
+        nmake -f lunar.mak install
+        cd ..
+        set CL=/I"./myincl"
+        copy lunar\*.lib .
+        nmake -f vc.mak
+      shell: cmd

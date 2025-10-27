@@ -1,0 +1,15 @@
+# Ignore large ephemeris data and archives
+data/ephemerides/**
+!data/ephemerides/.gitkeep
+
+vendor/jpl_eph/jpl_eph.zip
+vendor/**/build/**
+vendor/**/bin/**
+vendor/**/obj/**
+*.exe
+*.dll
+*.pdb
+*.obj
+*.o
+*.log
+*.tmp
