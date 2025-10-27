@@ -116,7 +116,7 @@ class SPICEConverter:
         # Generate intervals
         intervals = self._generate_intervals(start_jd, end_jd, interval_days)
         num_intervals = len(intervals)
-        print(f"Intervals: {num_intervals} × {interval_days} days")
+        print(f"Intervals: {num_intervals} x {interval_days} days")
 
         # Extract coefficients for each body
         print(f"Processing {len(self.body_ids)} bodies...")
