@@ -2,6 +2,13 @@
 data/ephemerides/**
 !data/ephemerides/.gitkeep
 
+# Ignore ephemeris binaries in workspace root (legacy files)
+/*.eph
+/*.bsp
+/*.440
+/*.441
+/*.431
+
 vendor/jpl_eph/jpl_eph.zip
 vendor/**/build/**
 vendor/**/bin/**

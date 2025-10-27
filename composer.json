@@ -1,0 +1,22 @@
+{
+    "name": "swisseph/ephemeris-reader",
+    "description": "Optimized ephemeris reader for PHP 8.4+ (JPL DE, EPM)",
+    "type": "library",
+    "keywords": ["ephemeris", "astronomy", "jpl", "epm", "chebyshev"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Swisseph\\Ephemeris\\": "php/src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Swisseph Team"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

@@ -1,0 +1,58 @@
+# Enforce LF line endings for all text files
+* text=auto eol=lf
+
+# Source code
+*.cpp text eol=lf
+*.c text eol=lf
+*.h text eol=lf
+*.hpp text eol=lf
+*.php text eol=lf
+*.js text eol=lf
+*.ts text eol=lf
+*.json text eol=lf
+*.xml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Scripts
+*.sh text eol=lf
+*.bash text eol=lf
+*.ps1 text eol=lf
+
+# Documentation
+*.md text eol=lf
+*.txt text eol=lf
+*.rst text eol=lf
+
+# Config files
+*.ini text eol=lf
+*.conf text eol=lf
+*.config text eol=lf
+Makefile text eol=lf
+*.mak text eol=lf
+
+# Git files
+.gitignore text eol=lf
+.gitattributes text eol=lf
+.gitkeep text eol=lf
+
+# Binary files (explicitly mark as binary)
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.a binary
+*.lib binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.bz2 binary
+*.7z binary
+
+# Ephemeris binary files
+*.440 binary
+*.441 binary
+*.431 binary
+*.bsp binary
+*.tf binary
+*.tpc binary
