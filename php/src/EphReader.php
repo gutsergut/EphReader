@@ -16,7 +16,7 @@ class EphReader
 {
     private const MAGIC = "EPH\0";
     private const HEADER_SIZE = 512;
-    private const BODY_ENTRY_SIZE = 32;
+    private const BODY_ENTRY_SIZE = 36;  // int32(4) + char[24](24) + uint64(8)
     private const INTERVAL_ENTRY_SIZE = 16;
 
     private $fp;
@@ -72,7 +72,7 @@ class EphReader
 
         for ($i = 0; $i < $this->header['numBodies']; $i++) {
             $data = fread($this->fp, self::BODY_ENTRY_SIZE);
-            $entry = unpack('lbodyId/a24name/PdataOffset', $data);
+            $entry = unpack('lbodyId/a24name/QdataOffset', $data);
 
             $this->bodies[$entry['bodyId']] = [
                 'name' => rtrim($entry['name'], "\0"),
@@ -226,12 +226,15 @@ class EphReader
         if ($n === 0) return 0.0;
         if ($n === 1) return 0.0;
 
-        // Derivative coefficients
+        // Derivative coefficients using Chebyshev differentiation formula
         $deriv = array_fill(0, $n - 1, 0.0);
-        $deriv[$n - 2] = 2.0 * ($n - 1) * $coeffs[$n - 1];
+
+        if ($n >= 2) {
+            $deriv[$n - 2] = 2.0 * ($n - 1) * ($coeffs[$n - 1] ?? 0.0);
+        }
 
         for ($k = $n - 3; $k >= 0; $k--) {
-            $deriv[$k] = $deriv[$k + 2] + 2.0 * ($k + 1) * $coeffs[$k + 1];
+            $deriv[$k] = ($deriv[$k + 2] ?? 0.0) + 2.0 * ($k + 1) * ($coeffs[$k + 1] ?? 0.0);
         }
 
         return $this->chebyshev($deriv, $x);

@@ -6,7 +6,7 @@ Usage:
     python spice2eph.py input.bsp output.eph [--bodies 1,2,3,399,301]
 
 Requirements:
-    pip install calceph numpy
+    pip install spiceypy numpy scipy
 
 Format specification:
     Header (512 bytes):
@@ -43,9 +43,9 @@ from typing import List, Dict, Tuple
 import numpy as np
 
 try:
-    from calceph import CalcephBin, Constants
+    import spiceypy as spice
 except ImportError:
-    print("ERROR: calceph not installed. Run: pip install calceph", file=sys.stderr)
+    print("ERROR: spiceypy not installed. Run: pip install spiceypy", file=sys.stderr)
     sys.exit(1)
 
 
@@ -81,7 +81,7 @@ class SPICEConverter:
     MAGIC = b"EPH\0"
     VERSION = 1
     HEADER_SIZE = 512
-    BODY_ENTRY_SIZE = 32
+    BODY_ENTRY_SIZE = 36  # int32(4) + char[24](24) + uint64(8) = 36 bytes
     INTERVAL_ENTRY_SIZE = 16
 
     def __init__(self, input_path: str, output_path: str, body_ids: List[int] = None):
@@ -95,12 +95,22 @@ class SPICEConverter:
     def convert(self, interval_days: float = 16.0):
         """Main conversion routine"""
         print(f"Opening SPICE file: {self.input_path}")
-        eph = CalcephBin(str(self.input_path))
+        spice.furnsh(str(self.input_path))
 
-        # Get time range
-        time_range = eph.gettimerange()
-        start_jd = time_range[0]
-        end_jd = time_range[1]
+        # Get time range from SPICE kernel
+        cover = spice.spkcov(str(self.input_path), self.body_ids[0])
+        intervals_spice = [spice.wnfetd(cover, i) for i in range(spice.wncard(cover))]
+
+        if not intervals_spice:
+            raise RuntimeError("No coverage intervals found in SPICE file")
+
+        # Use first interval (typically covers full range)
+        # ET is in seconds past J2000, convert to JD
+        start_et, end_et = intervals_spice[0]
+        J2000_JD = 2451545.0  # JD of J2000.0 epoch
+        start_jd = J2000_JD + start_et / 86400.0  # ET seconds to days
+        end_jd = J2000_JD + end_et / 86400.0
+
         print(f"Time range: JD {start_jd:.2f} to {end_jd:.2f} ({end_jd - start_jd:.1f} days)")
 
         # Generate intervals
@@ -117,17 +127,17 @@ class SPICEConverter:
             print(f"  {body_name} (ID {body_id})...", end="", flush=True)
 
             try:
-                coeffs = self._extract_coefficients(eph, body_id, intervals)
+                coeffs = self._extract_coefficients(body_id, intervals)
                 all_coeffs[body_id] = coeffs
                 print(f" OK ({len(coeffs)} intervals)")
             except Exception as e:
                 print(f" SKIP ({e})")
                 continue
 
-        if not all_coeffs:
-            raise RuntimeError("No bodies successfully extracted")
+        spice.unload(str(self.input_path))
 
-        # Determine coefficient degree (assume all same)
+        if not all_coeffs:
+            raise RuntimeError("No bodies successfully extracted")        # Determine coefficient degree (assume all same)
         first_body_coeffs = next(iter(all_coeffs.values()))
         coeff_degree = len(first_body_coeffs[0]['x']) - 1
         print(f"Coefficient degree: {coeff_degree}")
@@ -158,11 +168,11 @@ class SPICEConverter:
 
         return intervals
 
-    def _extract_coefficients(self, eph: CalcephBin, body_id: int, intervals: List[Tuple[float, float]]) -> List[Dict]:
+    def _extract_coefficients(self, body_id: int, intervals: List[Tuple[float, float]]) -> List[Dict]:
         """
         Extract Chebyshev coefficients by fitting positions in each interval
 
-        Note: CALCEPH doesn't expose raw Chebyshev coefficients, so we:
+        Note: spiceypy doesn't expose raw Chebyshev coefficients, so we:
         1. Sample positions at Chebyshev nodes in each interval
         2. Fit Chebyshev polynomials to samples
         """
@@ -170,7 +180,7 @@ class SPICEConverter:
 
         for jd_start, jd_end in intervals:
             # Sample at Chebyshev nodes (optimal for polynomial fitting)
-            degree = 13  # Use degree 13 (14 coefficients) like JPL DE
+            degree = 7  # Use degree 7 (8 coefficients) - faster than JPL's 13
             n_samples = degree + 1
 
             # Chebyshev nodes in [-1, 1]
@@ -185,14 +195,20 @@ class SPICEConverter:
             positions = []
             for jd in jd_samples:
                 try:
-                    # compute(jd, target, center) returns [x, y, z, vx, vy, vz]
-                    pos_vel = eph.compute(jd, body_id, 0)  # relative to SSB
-                    positions.append(pos_vel[:3])  # just position
-                except:
+                    # Convert JD to ET (ephemeris time): ET = (JD - J2000_JD) * 86400
+                    J2000_JD = 2451545.0
+                    et = (jd - J2000_JD) * 86400.0
+                    # spkgps returns state (pos + vel) relative to SSB (body 0)
+                    state, _ = spice.spkgps(body_id, et, 'J2000', 0)
+                    positions.append(state[:3])  # just position (km)
+                except Exception as e:
                     # If calculation fails, use zeros (graceful degradation)
                     positions.append([0.0, 0.0, 0.0])
 
             positions = np.array(positions)
+
+            # Convert km to AU (1 AU = 149597870.7 km)
+            positions = positions / 149597870.7
 
             # Fit Chebyshev polynomials
             x_coeffs = self._fit_chebyshev(nodes, positions[:, 0], degree)
@@ -211,20 +227,10 @@ class SPICEConverter:
         """
         Fit Chebyshev polynomial to sampled values at Chebyshev nodes
 
-        Uses Discrete Cosine Transform (DCT) for efficient computation
+        Uses numpy's Chebyshev polynomial fitting (simpler than DCT)
         """
-        from scipy.fft import dct
-
-        # DCT type-I (endpoints included)
-        coeffs = dct(values, type=1) / len(nodes)
-        coeffs[0] /= 2
-        coeffs[-1] /= 2
-
-        # Pad or truncate to desired degree
-        if len(coeffs) < degree + 1:
-            coeffs = np.pad(coeffs, (0, degree + 1 - len(coeffs)))
-        else:
-            coeffs = coeffs[:degree + 1]
+        # Fit Chebyshev polynomial using numpy
+        coeffs = np.polynomial.chebyshev.chebfit(nodes, values, degree)
 
         return coeffs
 

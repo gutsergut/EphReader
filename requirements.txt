@@ -1,6 +1,5 @@
 # Python dependencies for SPICE to .eph conversion
 # Install: pip install -r requirements.txt
 
-calceph>=3.5.0      # Multi-format ephemeris reader (SPICE, INPOP, JPL)
-numpy>=1.24.0       # Numerical arrays for coefficient fitting
-scipy>=1.10.0       # DCT for Chebyshev polynomial fitting
+spiceypy>=6.0.0     # NASA SPICE Toolkit Python wrapper
+numpy>=1.24.0       # Numerical arrays and Chebyshev polynomial fitting
