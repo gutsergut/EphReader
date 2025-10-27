@@ -1,0 +1,7 @@
+=== Conversion Status ===
+Started: 2025-10-28 03:44:19
+Command: python tools\spice2eph.py (12 bodies, interval 32 days)
+Expected duration: 2-6 hours
+Monitor: .\monitor_conversion.ps1
+
+Progress check:
