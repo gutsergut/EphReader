@@ -144,10 +144,13 @@ class EphReader
         $data = fread($this->fp, $totalCoeffs * 8);
         $coeffs = unpack("d{$totalCoeffs}", $data);
 
+        // unpack() returns 1-indexed array, convert to 0-indexed
+        $coeffs = array_values($coeffs);
+
         return [
-            'x' => array_slice($coeffs, 1, $coeffsPerComponent),
-            'y' => array_slice($coeffs, 1 + $coeffsPerComponent, $coeffsPerComponent),
-            'z' => array_slice($coeffs, 1 + 2 * $coeffsPerComponent, $coeffsPerComponent)
+            'x' => array_slice($coeffs, 0, $coeffsPerComponent),
+            'y' => array_slice($coeffs, $coeffsPerComponent, $coeffsPerComponent),
+            'z' => array_slice($coeffs, 2 * $coeffsPerComponent, $coeffsPerComponent)
         ];
     }
 

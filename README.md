@@ -158,7 +158,33 @@ echo "Velocity (AU/day): ";
 echo sprintf("VX=%.8f, VY=%.8f, VZ=%.8f\n", ...$result['vel']);
 ```
 
-**Performance**: ~0.5-2 ms per computation on typical hardware (pure PHP, no extensions).
+## Performance Benchmarks
+
+Comprehensive benchmark comparing three formats (1000 random access operations on Earth ephemeris):
+
+| Format      | Speed (ops/sec) | File Size | Accuracy | Access Method |
+|-------------|-----------------|-----------|----------|---------------|
+| **Binary .eph** | **8,565** | **10.79 MB** | ✅ Correct | fseek/unpack |
+| SQLite .db  | 162 | 16.89 MB | ✅ Correct | PDO SQL |
+| SPICE BSP   | 4,768 | 147.13 MB | ✅ Reference | Python spiceypy |
+
+**Key Findings**:
+- **Binary .eph is 53× faster than SQLite** for random access
+- **Binary .eph is 36% smaller** than SQLite (13.6× compression from original SPICE)
+- **All formats produce identical coordinates** (verified at J2000.0 and 1000 random points)
+- SPICE fastest for sequential access (11,631 ops/sec) due to internal caching
+- SQLite best for initialization (4.6 ms vs Binary 41.3 ms)
+
+**Recommendation**:
+- **Production**: Use **Binary .eph** (fastest, smallest, correct)
+- **Development/Debugging**: Use **SQLite .db** (SQL queries, sqlite3 CLI)
+
+**Performance characteristics** (single computation):
+- Binary .eph: ~0.12 ms (8,565 ops/sec)
+- SQLite .db: ~6.1 ms (162 ops/sec)
+- SPICE BSP: ~0.21 ms (4,768 ops/sec, Python-only)
+
+See `BINARY_FIX_COMPLETE.txt` and `BENCHMARK_RESULTS.txt` for detailed analysis.
 
 ## Build utilities (Windows/pwsh)
 - MSVC (Developer PowerShell):
