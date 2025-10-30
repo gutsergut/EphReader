@@ -1,22 +1,49 @@
 {
-    "name": "swisseph/ephemeris-reader",
-    "description": "Optimized ephemeris reader for PHP 8.4+ (JPL DE, EPM)",
+    "name": "ephreader/ephreader",
+    "description": "Multi-format planetary ephemeris reader library for PHP 8.4+ (JPL DE440, EPM2021, Swiss Ephemeris, custom .eph format)",
     "type": "library",
-    "keywords": ["ephemeris", "astronomy", "jpl", "epm", "chebyshev"],
+    "keywords": [
+        "ephemeris",
+        "astronomy",
+        "jpl",
+        "de440",
+        "epm2021",
+        "swiss-ephemeris",
+        "planetary-positions",
+        "chebyshev",
+        "spice",
+        "orbit-integration"
+    ],
     "license": "MIT",
+    "homepage": "https://github.com/yourusername/ephreader",
+    "readme": "README.md",
     "require": {
         "php": "^8.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
     },
     "autoload": {
         "psr-4": {
             "Swisseph\\Ephemeris\\": "php/src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Swisseph\\Ephemeris\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
-            "name": "Swisseph Team"
+            "name": "EphReader Contributors",
+            "homepage": "https://github.com/yourusername/ephreader/contributors"
         }
     ],
+    "support": {
+        "issues": "https://github.com/yourusername/ephreader/issues",
+        "source": "https://github.com/yourusername/ephreader",
+        "docs": "https://github.com/yourusername/ephreader/blob/main/USER_GUIDE.md"
+    },
     "minimum-stability": "stable",
     "prefer-stable": true
 }

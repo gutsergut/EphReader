@@ -1,0 +1,341 @@
+{
+  "version": "1.0",
+  "description": "Универсальный конвертер эфемерид - конфигурация",
+
+  "sources": {
+    "de440": {
+      "type": "spice_spk",
+      "path": "data/ephemerides/jpl/de440/linux_p1550p2650.440",
+      "format": "jpl_binary",
+      "available_bodies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 301, 399],
+      "coverage": {
+        "start_jd": 2305424.5,
+        "end_jd": 2817168.5,
+        "years": 1100
+      }
+    },
+
+    "de441": {
+      "type": "spice_spk",
+      "path": "data/ephemerides/jpl/de441/linux_m13000p17000.441",
+      "format": "jpl_binary",
+      "available_bodies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 199, 299, 301, 399],
+      "coverage": {
+        "start_jd": -3100014.5,
+        "end_jd": 8000016.5,
+        "years": 30390
+      }
+    },
+
+    "de431_part1": {
+      "type": "spice_spk",
+      "path": "data/ephemerides/jpl/de431/de431_part-1.bsp",
+      "format": "spice_daf",
+      "available_bodies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 199, 299, 301, 399],
+      "coverage": {
+        "start_jd": -3100014.5,
+        "end_jd": 1721425.5,
+        "years": 13200
+      }
+    },
+
+    "de431_part2": {
+      "type": "spice_spk",
+      "path": "data/ephemerides/jpl/de431/de431_part-2.bsp",
+      "format": "spice_daf",
+      "available_bodies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 199, 299, 301, 399],
+      "coverage": {
+        "start_jd": 1721425.5,
+        "end_jd": 8000016.5,
+        "years": 17190
+      }
+    },
+
+    "epm2021": {
+      "type": "spice_spk",
+      "path": "data/ephemerides/epm/2021/spice/epm2021.bsp",
+      "format": "spice_daf",
+      "available_bodies": [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 199, 299, 301, 399,
+        2000001, 2000002, 2000004, 2000007, 2000324,
+        2090377, 2136108, 2136199, 2136472,
+        1000000001
+      ],
+      "coverage": {
+        "start_jd": 2374544.5,
+        "end_jd": 2530692.5,
+        "years": 427
+      }
+    }
+  },
+
+  "body_intervals": {
+    "description": "ТОЧНЫЕ нативные интервалы из calceph_inspector (CALCEPH 4.0.1)",
+    "comment": "Извлечено напрямую из SPK файлов (не из документации!). DE431 Type 2 (Chebyshev), EPM2021 Type 20 (Hermite).",
+    "source": "vendor/calceph-4.0.1/install/bin/calceph_inspector.exe",
+    "extraction_date": "2025-01-XX",
+
+    "1": {
+      "name": "Mercury",
+      "de431": 8,
+      "epm2021": 5,
+      "recommended": 8,
+      "comment": "DE431 (Type 2 Chebyshev) vs EPM (Type 20 Hermite)"
+    },
+    "2": {
+      "name": "Venus",
+      "de431": 16,
+      "epm2021": 20,
+      "recommended": 16,
+      "comment": "DE более детальный"
+    },
+    "3": {
+      "name": "EMB",
+      "de431": 16,
+      "epm2021": 2,
+      "recommended": 2,
+      "comment": "EPM ГОРАЗДО детальнее (улучшенные LLR данные)"
+    },
+    "4": {
+      "name": "Mars",
+      "de431": 32,
+      "epm2021": 50,
+      "recommended": 32,
+      "comment": "DE более детальный"
+    },
+    "5": {
+      "name": "Jupiter",
+      "de431": 32,
+      "epm2021": 100,
+      "recommended": 32,
+      "comment": "DE ГОРАЗДО детальнее"
+    },
+    "6": {
+      "name": "Saturn",
+      "de431": 32,
+      "epm2021": 300,
+      "recommended": 32,
+      "comment": "DE ГОРАЗДО детальнее"
+    },
+    "7": {
+      "name": "Uranus",
+      "de431": 32,
+      "epm2021": 400,
+      "recommended": 32,
+      "comment": "DE ГОРАЗДО детальнее"
+    },
+    "8": {
+      "name": "Neptune",
+      "de431": 32,
+      "epm2021": 500,
+      "recommended": 32,
+      "comment": "DE ГОРАЗДО детальнее"
+    },
+    "9": {
+      "name": "Pluto",
+      "de431": 32,
+      "epm2021": 600,
+      "recommended": 32,
+      "comment": "DE ГОРАЗДО детальнее (600 дней в EPM!)"
+    },
+    "10": {
+      "name": "Sun",
+      "de431": 16,
+      "epm2021": 2,
+      "recommended": 2,
+      "comment": "EPM ГОРАЗДО детальнее"
+    },
+    "199": {
+      "name": "Mercury Barycenter",
+      "de431": 11000000,
+      "recommended": null,
+      "comment": "Единственная запись в DE431 (trivial barycenter), не используется"
+    },
+    "299": {
+      "name": "Venus Barycenter",
+      "de431": 11000000,
+      "recommended": null,
+      "comment": "Единственная запись в DE431 (trivial barycenter), не используется"
+    },
+    "301": {
+      "name": "Moon",
+      "de431": 4,
+      "epm2021": 2,
+      "recommended": 2,
+      "comment": "EPM более детальный! (НЕ 8 дней как в документации)"
+    },
+    "399": {
+      "name": "Earth",
+      "de431": 4,
+      "epm2021": 2,
+      "recommended": 2,
+      "comment": "EPM более детальный"
+    },
+    "2000001": {
+      "name": "Ceres (asteroid)",
+      "epm2021": 100,
+      "recommended": 100,
+      "comment": "Доступен только в EPM2021"
+    },
+    "2000002": {
+      "name": "Pallas (asteroid)",
+      "epm2021": 100,
+      "recommended": 100,
+      "comment": "Доступен только в EPM2021"
+    },
+    "2000004": {
+      "name": "Vesta (asteroid)",
+      "epm2021": 100,
+      "recommended": 100,
+      "comment": "Доступен только в EPM2021"
+    },
+    "2000007": {
+      "name": "Iris (asteroid)",
+      "epm2021": 100,
+      "recommended": 100,
+      "comment": "Доступен только в EPM2021"
+    },
+    "2000324": {
+      "name": "Bamberga (asteroid)",
+      "epm2021": 100,
+      "recommended": 100,
+      "comment": "Доступен только в EPM2021"
+    },
+    "2090377": {
+      "name": "Sedna (TNO)",
+      "epm2021": 100,
+      "recommended": 100,
+      "comment": "Уникальный TNO, доступен только в EPM2021"
+    },
+    "2136108": {
+      "name": "Haumea (dwarf planet)",
+      "epm2021": 100,
+      "recommended": 100,
+      "comment": "Уникальная карликовая планета, только EPM2021"
+    },
+    "2136199": {
+      "name": "Eris (dwarf planet)",
+      "epm2021": 100,
+      "recommended": 100,
+      "comment": "Уникальная карликовая планета, только EPM2021"
+    },
+    "2136472": {
+      "name": "Makemake (dwarf planet)",
+      "epm2021": 100,
+      "recommended": 100,
+      "comment": "Уникальная карликовая планета, только EPM2021"
+    },
+    "1000000001": {
+      "name": "Pluto-Charon Barycenter",
+      "epm2021": 5,
+      "recommended": 5,
+      "comment": "Доступен только в EPM2021"
+    }
+  },
+
+  "output_formats": {
+    "eph_binary": {
+      "description": "Оптимизированный бинарный формат .eph для PHP",
+      "extension": ".eph",
+      "advantages": [
+        "Быстрый fseek доступ",
+        "Минимальный размер (5-7× сжатие от SPICE)",
+        "Pure PHP без зависимостей",
+        "Прямой unpack doubles"
+      ]
+    },
+
+    "sqlite": {
+      "description": "SQLite база данных с индексами",
+      "extension": ".db",
+      "advantages": [
+        "SQL запросы",
+        "Индексы по времени и телу",
+        "Поддержка BLOB для коэффициентов",
+        "Работает с любым языком"
+      ]
+    },
+
+    "hdf5": {
+      "description": "HDF5 научный формат",
+      "extension": ".h5",
+      "advantages": [
+        "Научный стандарт",
+        "Встроенное сжатие",
+        "Многомерные массивы",
+        "Поддержка Python/C/Fortran"
+      ]
+    },
+
+    "json": {
+      "description": "JSON текстовый формат (для малых датасетов)",
+      "extension": ".json",
+      "advantages": [
+        "Человекочитаемый",
+        "Универсальный парсинг",
+        "Отладка и инспекция"
+      ],
+      "disadvantages": [
+        "Большой размер",
+        "Медленный парсинг"
+      ]
+    }
+  },
+
+  "conversion_profiles": {
+    "standard": {
+      "description": "Стандартная конвертация - 12 основных тел",
+      "bodies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 301, 399],
+      "use_native_intervals": true,
+      "output_format": "eph_binary"
+    },
+
+    "full_epm": {
+      "description": "Полная конвертация EPM2021 с уникальными телами",
+      "bodies": [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 301, 399,
+        2000001, 2000002, 2000004, 2000007, 2000324,
+        2090377, 2136108, 2136199, 2136472
+      ],
+      "use_native_intervals": true,
+      "output_format": "eph_binary"
+    },
+
+    "minimal": {
+      "description": "Минимальный набор - Солнце, Луна, планеты",
+      "bodies": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "interval_days": 16.0,
+      "output_format": "eph_binary"
+    },
+
+    "astrology": {
+      "description": "Для астрологии - основные тела + Chiron (из Swiss)",
+      "bodies": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15],
+      "note": "Chiron доступен только в Swiss Ephemeris",
+      "interval_days": 16.0,
+      "output_format": "eph_binary"
+    }
+  },
+
+  "examples": {
+    "convert_de440_standard": {
+      "command": "python tools/universal_converter.py --source de440 --profile standard --output data/ephemerides/jpl/de440.eph",
+      "description": "Конвертация DE440 со стандартным набором тел"
+    },
+
+    "convert_epm_full": {
+      "command": "python tools/universal_converter.py --source epm2021 --profile full_epm --output data/ephemerides/epm/epm2021_full.eph",
+      "description": "Полная конвертация EPM2021 с TNO"
+    },
+
+    "custom_bodies": {
+      "command": "python tools/universal_converter.py --source epm2021 --bodies 10,301,2090377,2136199 --intervals 32,8,128,128 --output sedna_eris.eph",
+      "description": "Кастомный набор: Солнце, Луна, Sedna, Eris с индивидуальными интервалами"
+    },
+
+    "merge_de431": {
+      "command": "python tools/universal_converter.py --sources de431_part1,de431_part2 --profile standard --output de431_merged.eph",
+      "description": "Объединение DE431 Part 1 и Part 2 в один файл"
+    }
+  }
+}

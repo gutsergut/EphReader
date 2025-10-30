@@ -137,7 +137,7 @@ $eph = new EphReader(__DIR__ . '/../../data/ephemerides/epm/2021/epm2021.eph');
 
 ### Ошибка: "JD outside ephemeris range"
 
-EPM2021: 1787–2214 AD (JD ~2373484 – 2529200)  
+EPM2021: 1787–2214 AD (JD ~2373484 – 2529200)
 Проверьте:
 ```php
 $meta = $eph->getMetadata();

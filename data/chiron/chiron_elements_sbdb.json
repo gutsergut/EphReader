@@ -1,0 +1,255 @@
+{
+  "metadata": {
+    "source": "JPL Small Body Database Browser",
+    "query_date": "2025-10-30T05:33:26.110042",
+    "body_id": 2060,
+    "body_name": "2060 Chiron (1977 UB)",
+    "des": "2060",
+    "spkid": "20002060",
+    "kind": "an",
+    "orbit_class": "Centaur",
+    "neo": false,
+    "pha": false
+  },
+  "orbital_elements": {
+    "eccentricity": {
+      "value": ".3789792365116352",
+      "sigma": "1.7989E-8",
+      "units": null,
+      "label": "e"
+    },
+    "semimajor_axis": {
+      "value": "13.69219886521367",
+      "sigma": "5.3567E-7",
+      "units": "au",
+      "label": "a"
+    },
+    "perihelion_distance": {
+      "value": "8.503139793109515",
+      "sigma": "5.636E-7",
+      "units": "au",
+      "label": "q"
+    },
+    "inclination": {
+      "value": "6.926003552106803",
+      "sigma": "4.1005E-7",
+      "units": "deg",
+      "label": "i"
+    },
+    "longitude_ascending_node": {
+      "value": "209.2984203898103",
+      "sigma": "2.3285E-6",
+      "units": "deg",
+      "label": "node"
+    },
+    "argument_perihelion": {
+      "value": "339.2537405240005",
+      "sigma": "7.134E-6",
+      "units": "deg",
+      "label": "peri"
+    },
+    "mean_anomaly": {
+      "value": "212.8397748447833",
+      "sigma": "1.6027E-5",
+      "units": "deg",
+      "label": "M"
+    },
+    "time_perihelion": {
+      "value": "2468565.277643240056",
+      "sigma": ".0012575",
+      "units": "TDB",
+      "label": "tp"
+    },
+    "orbital_period": {
+      "value": "18505.81533627044",
+      "sigma": ".001086",
+      "units": "d",
+      "label": "period"
+    },
+    "mean_motion": {
+      "value": ".01945334444651129",
+      "sigma": "1.1416E-9",
+      "units": "deg/d",
+      "label": "n"
+    },
+    "aphelion_distance": {
+      "value": "18.88125793731783",
+      "sigma": "7.3868E-7",
+      "units": "au",
+      "label": "Q"
+    },
+    "epoch": {
+      "jd": "2461000.5",
+      "label": ""
+    }
+  },
+  "physical_parameters": {
+    "H": {
+      "value": "5.55",
+      "sigma": null,
+      "units": null,
+      "title": "absolute magnitude",
+      "ref": "MPO914145"
+    },
+    "diameter": {
+      "value": "166",
+      "sigma": null,
+      "units": "km",
+      "title": "diameter",
+      "ref": "Dunham occultation list: Duham 1998"
+    },
+    "rot_per": {
+      "value": "5.918",
+      "sigma": null,
+      "units": "h",
+      "title": "rotation period",
+      "ref": "LCDB (Rev. 2023-October); Warner et al., 2009"
+    },
+    "albedo": {
+      "value": "0.15",
+      "sigma": "0.03",
+      "units": null,
+      "title": "geometric albedo",
+      "ref": "Earth, Moon, and Planets, v. 89, Issue 1, p. 117-134 (2002)"
+    },
+    "BV": {
+      "value": "0.704",
+      "sigma": "0.024",
+      "units": null,
+      "title": "B-V",
+      "ref": "EAR-A-5-DDR-UBV-MEAN-VALUES-V1.2"
+    },
+    "UB": {
+      "value": "0.283",
+      "sigma": "0.060",
+      "units": null,
+      "title": "U-B",
+      "ref": "EAR-A-5-DDR-UBV-MEAN-VALUES-V1.2"
+    },
+    "spec_T": {
+      "value": "B",
+      "sigma": null,
+      "units": null,
+      "title": "Tholen spectral type",
+      "ref": "EAR-A-5-DDR-TAXONOMY-V4.0"
+    },
+    "spec_B": {
+      "value": "Cb",
+      "sigma": null,
+      "units": null,
+      "title": "SMASSII spectral type",
+      "ref": "EAR-A-5-DDR-TAXONOMY-V4.0"
+    }
+  },
+  "covariance_matrix": {
+    "elements": [
+      {
+        "title": "eccentricity",
+        "label": "e",
+        "name": "e",
+        "value": ".3826389951578166",
+        "units": null,
+        "sigma": 1.77877516226773e-08
+      },
+      {
+        "label": "q",
+        "title": "perihelion distance",
+        "units": "au",
+        "name": "q",
+        "value": "8.421754632236691",
+        "sigma": 5.58070511672534e-07
+      },
+      {
+        "sigma": 0.000259067262493231,
+        "name": "tp",
+        "value": "2450141.133868388010",
+        "units": "TDB",
+        "title": "time of perihelion passage",
+        "label": "tp"
+      },
+      {
+        "sigma": 2.32308905346959e-06,
+        "units": "deg",
+        "name": "om",
+        "value": "209.2103929942286",
+        "label": "node",
+        "title": "longitude of the ascending node"
+      },
+      {
+        "sigma": 7.05897591067639e-06,
+        "units": "deg",
+        "name": "w",
+        "value": "339.5755163826855",
+        "label": "peri",
+        "title": "argument of perihelion"
+      },
+      {
+        "sigma": 4.11239758934011e-07,
+        "name": "i",
+        "units": "deg",
+        "value": "6.948006811163477",
+        "label": "i",
+        "title": "inclination"
+      }
+    ],
+    "labels": [
+      "e",
+      "q",
+      "tp",
+      "node",
+      "peri",
+      "i"
+    ],
+    "epoch": "2457707.5",
+    "data": [
+      [
+        "3.164041077900589E-16",
+        "-9.553193125665831E-15",
+        "-1.094500615049072E-12",
+        "-5.071608019225107E-16",
+        "-8.964174487816552E-14",
+        "-4.336410158832517E-17"
+      ],
+      [
+        "-9.553193125665831E-15",
+        "3.114426959984435E-13",
+        "6.378048181323485E-11",
+        "-1.030164289558029E-14",
+        "3.347572852419473E-12",
+        "6.443302166041968E-15"
+      ],
+      [
+        "-1.094500615049072E-12",
+        "6.378048181323485E-11",
+        "6.711584649573671E-8",
+        "1.235200746706273E-11",
+        "1.341380238073794E-9",
+        "-1.706170158978138E-12"
+      ],
+      [
+        "-5.071608019225107E-16",
+        "-1.030164289558029E-14",
+        "1.235200746706273E-11",
+        "5.396742750350255E-12",
+        "-5.452998286977899E-12",
+        "-9.335380047094235E-13"
+      ],
+      [
+        "-8.964174487816552E-14",
+        "3.347572852419473E-12",
+        "1.341380238073794E-9",
+        "-5.452998286977899E-12",
+        "4.982914090750956E-11",
+        "9.904131979266343E-13"
+      ],
+      [
+        "-4.336410158832517E-17",
+        "6.443302166041968E-15",
+        "-1.706170158978138E-12",
+        "-9.335380047094235E-13",
+        "9.904131979266343E-13",
+        "1.691181393281036E-13"
+      ]
+    ]
+  }
+}

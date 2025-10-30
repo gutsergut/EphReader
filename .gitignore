@@ -1,14 +1,45 @@
-# Ignore large ephemeris data and archives
+# EphReader - Git Ignore File
+
+# ===== Ephemeris Data Files (LARGE - Download separately) =====
+# See USER_GUIDE.md for download instructions
 data/ephemerides/**
 !data/ephemerides/.gitkeep
+!data/ephemerides/*/.gitkeep
+!data/ephemerides/*/*/.gitkeep
 
-# Ignore ephemeris binaries in workspace root (legacy files)
+# Large Chiron data files
+data/chiron/MPCORB.DAT
+data/chiron/MPCORB.DAT.gz
+
+# Ephemeris binaries in workspace root
 /*.eph
 /*.bsp
 /*.440
 /*.441
 /*.431
+/*.se1
 
+# ===== PHP Dependencies =====
+/vendor/
+composer.lock
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ===== Build Artifacts =====
 vendor/jpl_eph/jpl_eph.zip
 vendor/**/build/**
 vendor/**/bin/**
@@ -18,5 +49,34 @@ vendor/**/obj/**
 *.pdb
 *.obj
 *.o
+
+# ===== Logs and Temporary Files =====
 *.log
 *.tmp
+*.txt
+!requirements.txt
+
+# ===== IDE and Editor Files =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ===== OS Files =====
+desktop.ini
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# ===== Backup Files =====
+*.backup
+*.bak
+*_OLD.*
+*_BACKUP.*
+
+# ===== Test Output =====
+test_output/
+benchmark_output/

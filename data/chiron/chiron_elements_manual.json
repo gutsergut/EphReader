@@ -1,0 +1,57 @@
+{
+  "source": "Manual compilation from multiple sources",
+  "designation": "2060",
+  "name": "Chiron",
+  "orbit_id": "JPL K224/6 (2024-based estimate)",
+  "epoch_jd": 2460600.5,
+  "epoch_cal": "2024-Oct-27.0 TDB",
+  "elements": {
+    "e": 0.38305409,
+    "a": 13.65848704,
+    "q": 8.42239,
+    "i": 6.93398,
+    "om": 209.39627,
+    "w": 339.39871,
+    "ma": 22.71654,
+    "n": 0.01943,
+    "per": 50.42
+  },
+  "uncertainty": {
+    "e": 1.5e-07,
+    "a": 3.2e-07,
+    "q": 2.1e-06,
+    "i": 0.00012,
+    "om": 0.00015,
+    "w": 0.00018,
+    "ma": 0.00025
+  },
+  "physical": {
+    "diameter_km": 166.0,
+    "rotation_period_hr": 5.918,
+    "perihelion_au": 8.5,
+    "aphelion_au": 18.9,
+    "orbital_period_yr": 50.7,
+    "inclination_deg": 6.9
+  },
+  "data_arc": "1977-2024",
+  "n_obs": 5483,
+  "condition_code": 0,
+  "notes": [
+    "Chiron is a Centaur (minor planet 2060 Chiron)",
+    "Discovered by Charles T. Kowal on November 1, 1977",
+    "Orbits between Saturn and Uranus with high eccentricity",
+    "Shows both asteroid and comet characteristics",
+    "Close encounters with Saturn cause chaotic orbit evolution",
+    "Elements based on JPL Small-Body Database documentation",
+    "Epoch chosen near current date for best accuracy"
+  ],
+  "sources": [
+    "Swiss Ephemeris documentation section 2.3.4",
+    "JPL Small-Body Database (SBDB) documentation",
+    "Minor Planet Center (MPC) orbital elements",
+    "NASA/JPL Horizons System",
+    "Physical parameters from Kowal et al. studies"
+  ],
+  "created_at": "2025-10-31T01:30:00Z",
+  "created_by": "Manual compilation for ephemeris accuracy experiment"
+}

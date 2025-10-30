@@ -1,0 +1,32 @@
+{
+  "number": "02060",
+  "readable_name": "(2060) Chiron",
+  "epoch": "K25BL",
+  "epoch_jd": 2461001.5,
+  "epoch_cal": "2025-11-21",
+  "elements": {
+    "H": 5.55,
+    "G": 0.15,
+    "e": 0.3789792,
+    "a": null,
+    "i": 6.926,
+    "om": 209.29854,
+    "w": 339.25364,
+    "ma": 212.83973,
+    "n": 0.01945334,
+    "per": 50.6661726658536
+  },
+  "uncertainty": "0",
+  "observations": {
+    "num_obs": 5300,
+    "num_opps": 56,
+    "arc": "1941-2025",
+    "rms": 0.64
+  },
+  "reference": "E2025-UR3",
+  "perturbers": "M-v 3Ek",
+  "computer": "MPCLINUX",
+  "flags": "000A",
+  "last_obs": "0251027",
+  "source": "Minor Planet Center MPCORB.DAT"
+}
